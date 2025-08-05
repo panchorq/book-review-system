@@ -21,10 +21,11 @@ RSpec.describe Book, type: :model do
         create(:review, book: book, rating: 5, user: banned_user)
         create(:review, book: book, rating: 4)
         create(:review, book: book, rating: 5)
+        create(:review, book: book, rating: 3)
       end
 
       it "does not count banned users' reviews" do
-        expect(book.average_rating).to eq(4.5)
+        expect(book.average_rating).to eq(4.0)
       end
     end
 
