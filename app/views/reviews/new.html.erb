@@ -1,0 +1,30 @@
+<h1>Nueva reseña para <%= @book.title %></h1>
+
+<%= form_with(model: [@book, @review], local: true) do |form| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> impidió que esta reseña se guardara:</h2>
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :rating, 'Calificación (1-5)' %>
+    <%= form.number_field :rating %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content, 'Contenido' %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Crear Reseña", class: 'btn btn-success mt-1 mb-2' %>
+  </div>
+<% end %>
+
+<%= link_to 'Volver al libro', book_path(@book), class: 'btn btn-secondary' %>

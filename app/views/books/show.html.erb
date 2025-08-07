@@ -1,0 +1,19 @@
+<h1><%= @book.title %></h1>
+<p>Calificación Promedio: <%= @average_rating %></p>
+
+<h2>Reseñas</h2>
+<% @reviews.each do |review| %>
+  <p><strong><%= review.user.name %>:</strong> <%= review.rating %> estrellas</p>
+  <p><%= review.content %></p>
+
+    <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning mb-4' %>
+    <%= link_to 'Eliminar', review_path(review), data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro de que quieres eliminar esta reseña?' }, class: 'btn btn-danger mb-4' %>
+<% end %>
+
+</br>
+
+<%= link_to "Añadir reseña", new_book_review_path(@book), class: 'btn btn-secondary mb-2' %>
+
+</br>
+
+<%= link_to "Volver al listado de libros", books_path(@book), class: 'btn btn-secondary' %>
